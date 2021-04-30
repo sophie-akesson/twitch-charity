@@ -1,0 +1,201 @@
+#iconsDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  #navButton {
+    background-color: rgba($color: #000000, $alpha: 0);
+    border: 0;
+    position: relative;
+    width: 24px;
+    height: 16px;
+    cursor: pointer;
+    z-index: 100;
+  }
+  #navButton.menuClosed::before {
+    position: absolute;
+    content: "";
+    top: 3px;
+    left: 0;
+    width: 24px;
+    height: 4px;
+    background-color: $accent-color;
+    transition: transform 0.2s ease;
+  }
+  #navButton.menuClosed::after {
+    position: absolute;
+    content: "";
+    top: 12px;
+    left: 0;
+    width: 24px;
+    height: 4px;
+    background-color: $accent-color;
+    transition: transform 0.2s ease;
+  }
+  #navButton.menuOpen::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    width: 24px;
+    height: 4px;
+    background-color: $accent-color;
+    top: 5px;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+  #navButton.menuOpen::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    width: 24px;
+    height: 4px;
+    background-color: $accent-color;
+    top: 5px;
+    transform: rotate(-45deg);
+    transition: transform 0.2s ease;
+  }
+  svg {
+    max-height: 34px;
+  }
+}
+#menuDiv {
+  background-color: white;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  padding-left: 9.6vw;
+  padding-right: 9.6vw;
+  a:link,
+  a:visited {
+    display: block;
+    padding-top: 0.2rem;
+    padding-bottom: 1rem;
+    color: $accent-color;
+    font-weight: 600;
+    font-size: 50px;
+    text-decoration: none;
+  }
+  a:link:first-child {
+    padding-top: 1rem;
+  }
+  a:hover {
+    color: black;
+  }
+}
+
+.menuHide {
+  pointer-events: none;
+  height: 0;
+  opacity: 0;
+}
+
+.menuShow {
+  pointer-events: all;
+  z-index: 100;
+  height: 100%;
+  opacity: 1;
+  transition: opacity ease 0.2s;
+}
+
+@media screen and (min-width: 1440px) {
+  #iconsDiv {
+    padding-bottom: 7px;
+  }
+  #navButton {
+    display: none;
+  }
+  #menuDiv {
+    pointer-events: all;
+    z-index:10;
+    padding: 0;
+    position: static;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    grid-column-start: 3;
+    grid-column-end: 7;
+    a:link,
+    a:visited {
+      display: inline-block;
+      color: $accent-color;
+      font-weight: 600;
+      font-size: 24px;
+      text-decoration: none;
+      padding: 0;
+      position: relative;
+      padding-bottom: 7px;
+      &::before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: 0;
+        left: 0;
+        background-color: $accent-color;
+        transition: all 0.3s ease-in-out, background-color 0s ease;
+      }
+      &:hover::before {
+        width: 100%;
+        background-color: black;
+      }
+      &:hover:last-child::before {
+        width: 0;
+      }
+    }
+    a:link:first-child {
+      padding-top: 0;
+    }
+    a:link:nth-child(2) {
+      margin-left: 68px;
+      margin-right: 68px;
+    }
+    a:link:last-child {
+      margin-left: auto;
+    }
+    a:hover {
+      color: black;
+    }
+  }
+  .menuHide {
+    height: 100%;
+    opacity: 1;
+  }
+
+  .arrowLink::after {
+    margin-left: 10px;
+    display: inline-block;
+    content: "↗";
+    position: relative;
+    clip-path: inset(11px 1px 7px 2px);
+  }
+  .arrowLink:hover::after {
+    animation: arrowOut 0.1s ease-in 1 forwards, arrowIn 0.2s ease-in 0.1s 1 forwards;
+  }
+
+  @keyframes arrowOut {
+    from {
+      transform: translateX(0) translateY(0);
+      clip-path: inset(11px 1px 7px 2px);
+    }
+    to {
+      transform: translateX(12px) translateY(-12px);
+      clip-path: inset(12px 12px 0 0);
+    }
+  }
+
+  @keyframes arrowIn {
+    from {
+      transform: translateX(-12px) translateY(12px);
+      clip-path: inset(12px 0 12px 12px);
+    }
+    to {
+      transform: translateX(0) translateY(0);
+      clip-path: inset(11px 1px 7px 2px);
+    }
+  }
+}
